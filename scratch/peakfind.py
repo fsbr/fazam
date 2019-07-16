@@ -4,14 +4,15 @@ import numpy as np
 from scipy.ndimage.filters import maximum_filter
 from scipy.ndimage.morphology import generate_binary_structure, binary_erosion
 import matplotlib.pyplot as pp
-
+from scipy import misc
 #for some reason I had to reshape. Numpy ignored the shape header.
 #paws_data = np.loadtxt("paws.txt").reshape(4,11,14)
 
 #getting a list of images
 #paws = [p.squeeze() for p in np.vsplit(paws_data,4)]
 
-
+A = misc.imread('f1.png')
+print(A)
 def detect_peaks(image):
     """
     Takes an image and detect the peaks usingthe local maximum filter.
@@ -45,11 +46,16 @@ def detect_peaks(image):
 
 
 #applying the detection and plotting results
-for i, paw in enumerate(paws):
-    detected_peaks = detect_peaks(paw)
-    pp.subplot(4,2,(2*i+1))
-    pp.imshow(paw)
-    pp.subplot(4,2,(2*i+2) )
-    pp.imshow(detected_peaks)
+detected_peaks = detect_peaks(A)
+pp.subplot(121)
+pp.imshow(A)
+pp.subplot(122)
+pp.imshow(detected_peaks)
+#for i, paw in enumerate(paws):
+#    detected_peaks = detect_peaks(paw)
+#    pp.subplot(4,2,(2*i+1))
+#    pp.imshow(paw)
+#    pp.subplot(4,2,(2*i+2) )
+#    pp.imshow(detected_peaks)
 
 pp.show()

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # rayvans has 2 channel audio
 #fs,data = wavfile.read('RV.wav')
-fs,data = wavfile.read('FG.wav')
+fs,data = wavfile.read('EWF.wav')
 #generate the spectrogram channel wise
 N = len(data)
 time = np.arange(N)/float(fs)
@@ -51,6 +51,8 @@ row = Sxx.shape[0]
 col = Sxx.shape[1]
 Sxx1 = np.ones((row,col))
 # i is a nparry 
+
+# this not only didnt work, but it also sucked lol
 #hackx = np.array([])
 #hacky = np.array([])
 #for i in range(0,row):
@@ -63,20 +65,20 @@ Sxx1 = np.ones((row,col))
 #        else:
 #            pass
 #            #Sxx1[i,j] = 0
-#
-## so i think that we can roll with this and the understanding is that we're using
-## delta index instead of delta t
-#
-#print(Sxx1)
-##plt.pcolormesh(t,f,Sxx1)
-#plt.scatter(hackx,hacky)
-#plt.ylim([0, 4000])
-#plt.title('hacked constellation')
-#plt.show()
+
+# so i think that we can roll with this and the understanding is that we're using
+# delta index instead of delta t
+
+print(Sxx1)
+#plt.pcolormesh(t,f,Sxx1)
+plt.scatter(hackx,hacky)
+plt.ylim([0, 4000])
+plt.title('hacked constellation')
+plt.show()
 
 # trying new max filter
-constellation = ndimage.maximum_filter(Sxx,size=10)           
-print(constellation)
-plt.pcolormesh(t,f,constellation)
-plt.ylim([0,4000])
-plt.show()
+#constellation = ndimage.maximum_filter(Sxx,size=10)           
+#print(constellation)
+#plt.pcolormesh(t,f,constellation)
+#plt.ylim([0,4000])
+#plt.show()
