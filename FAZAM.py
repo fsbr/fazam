@@ -3,6 +3,8 @@ import numpy as np
 from scipy.io import wavfile
 from scipy import signal,ndimage
 import matplotlib.pyplot as plt
+np.set_printoptions(threshold=np.inf)
+flog = open('textfile.txt',"a")
 
 # rayvans has 2 channel audio
 #fs,data = wavfile.read('RV.wav')
@@ -16,6 +18,8 @@ time = np.arange(N)/float(fs)
 # lets get just the left ear
 f,t,Sxx = signal.spectrogram(data[:,0],fs,nfft=1024,scaling='spectrum')
 print(Sxx)
+flog.write(str(Sxx))
+flog.close()
 plt.pcolormesh(t,f,Sxx)
 plt.ylabel('Frequency [Hz]')
 plt.xlabel('Time [sec]')
@@ -70,8 +74,8 @@ Sxx1 = np.ones((row,col))
 # delta index instead of delta t
 
 print(Sxx1)
-#plt.pcolormesh(t,f,Sxx1)
-plt.scatter(hackx,hacky)
+plt.pcolormesh(t,f,Sxx1)
+#plt.scatter(hackx,hacky)
 plt.ylim([0, 4000])
 plt.title('hacked constellation')
 plt.show()
